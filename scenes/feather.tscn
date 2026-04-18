@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b7ublhecjnpxh"]
+
+[ext_resource type="Texture2D" uid="uid://bvgilwsyuywne" path="res://assets/sprites/feather.png" id="1_370ba"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv6ig"]
+size = Vector2(7.75, 17.5)
+
+[node name="Feather" type="Node2D" unique_id=1979316618]
+
+[node name="Feather" type="AnimatableBody2D" parent="." unique_id=608785724]
+
+[node name="Feather Texture" type="Sprite2D" parent="Feather" unique_id=1350759083]
+position = Vector2(-3.8146973e-06, 1.9999981)
+scale = Vector2(0.066666685, 0.1033333)
+texture = ExtResource("1_370ba")
+
+[node name="NonPhysics" type="CollisionShape2D" parent="Feather" unique_id=1179649008]
+shape = SubResource("RectangleShape2D_rv6ig")
+
+[node name="FeatherArea2D" type="Area2D" parent="Feather" unique_id=1209226674]
+
+[node name="CollisionFeather" type="CollisionShape2D" parent="Feather/FeatherArea2D" unique_id=1299522630]
+shape = SubResource("RectangleShape2D_rv6ig")

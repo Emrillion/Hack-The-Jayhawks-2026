@@ -6,9 +6,11 @@ public partial class JayHawkBasic : AnimatableBody2D
 {
 	// Called when the node enters the scene tree for the first time.
 	private float fireDelay =- 1;
+	private PackedScene _foxScene;
 	//let's init ours
 	public override void _Ready()
 	{
+		_foxScene = GD.Load<PackedScene>("res://src/JayHawkBasic.tscn");
 		GD.Print("hello");
 		var area = GetNode<Area2D>("AreaObj");
         area.BodyEntered += OnBodyEntered;//awful c# syntax to

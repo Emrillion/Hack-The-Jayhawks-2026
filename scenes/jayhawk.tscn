@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bffgs6ea1xq4s"]
+
+[ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="1_nqic8"]
+[ext_resource type="Texture2D" uid="uid://di847tlopg22s" path="res://assets/sprites/1rbtq8p.png" id="2_ny5cg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ewffm"]
+radius = 15.004166
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ahj8n"]
+radius = 109.55364
+
+[node name="Jayhawk" type="Node2D" unique_id=1261572074]
+
+[node name="JayhawkProto" type="AnimatableBody2D" parent="." unique_id=679833203]
+position = Vector2(282, 142)
+script = ExtResource("1_nqic8")
+
+[node name="JayhawkSprite" type="Sprite2D" parent="JayhawkProto" unique_id=105007555]
+position = Vector2(0.9999695, 29)
+scale = Vector2(0.093154766, 0.09360988)
+texture = ExtResource("2_ny5cg")
+
+[node name="stupidPhysics" type="CollisionShape2D" parent="JayhawkProto" unique_id=1414217397]
+position = Vector2(9, -59)
+shape = SubResource("CircleShape2D_ewffm")
+
+[node name="AreaObj" type="Area2D" parent="JayhawkProto" unique_id=1964099287]
+position = Vector2(2, 33)
+
+[node name="Area Collision" type="CollisionShape2D" parent="JayhawkProto/AreaObj" unique_id=70723184]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_ahj8n")
