@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://cac8iyxqsuubr" path="res://assets/sprites/1912jayhawk.jpg" id="1_cvfxx"]
 [ext_resource type="Script" uid="uid://b47inr5jm3v8x" path="res://Movement.cs" id="2_4k8hj"]
+[ext_resource type="PackedScene" uid="uid://ducmhn8mfa5i3" path="res://path_2d_test.tscn" id="3_2mmkl"]
 
 [node name="Node2D" type="Node2D" unique_id=1241262597]
 
 [node name="Hello World Guy" type="Sprite2D" parent="." unique_id=878938526]
-position = Vector2(163, 216)
+position = Vector2(166, 215)
 scale = Vector2(0.47968745, 0.47878483)
 texture = ExtResource("1_cvfxx")
 script = ExtResource("2_4k8hj")
@@ -20,3 +21,12 @@ text = "Good morning gentlemen. I learned Godot.
 
 Sincerely, 
 Sexy Legs Jayhawk"
+
+[node name="Path2D" parent="." unique_id=245586761 instance=ExtResource("3_2mmkl")]
+position = Vector2(505.99997, 189.99998)
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Path2D" unique_id=2146195556]
+position = Vector2(84.968506, 78.1165)
+rotation = 0.0023940979
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D2" unique_id=1779981606]

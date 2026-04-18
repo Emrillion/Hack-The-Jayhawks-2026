@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ducmhn8mfa5i3"]
+
+[ext_resource type="Script" uid="uid://b4pmk0cojqdao" path="res://Pathfinding.cs" id="1_so8ig"]
+[ext_resource type="Texture2D" uid="uid://cac8iyxqsuubr" path="res://assets/sprites/1912jayhawk.jpg" id="2_e8hf1"]
+
+[sub_resource type="Curve2D" id="Curve2D_na8xp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 84.968506, 78.1165, 0, 0, 0, 0, 454, 79, 0, 0, 0, 0, 453, 189, 0, 0, 0, 0, 83, 192, 0, 0, 0, 0, 85, 283, 0, 0, 0, 0, 458, 286)
+}
+point_count = 6
+
+[node name="Path2D" type="Path2D" unique_id=245586761]
+position = Vector2(-2.4426732, 28.730892)
+scale = Vector2(1.0053333, 0.89954233)
+curve = SubResource("Curve2D_na8xp")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=7556846]
+position = Vector2(84.968506, 78.1165)
+rotation = 0.0023940979
+script = ExtResource("1_so8ig")
+
+[node name="Sprite2D" type="Sprite2D" parent="PathFollow2D" unique_id=1370979258]
+position = Vector2(1.0129185, -1.1140862)
+scale = Vector2(0.09721854, 0.11088809)
+texture = ExtResource("2_e8hf1")
