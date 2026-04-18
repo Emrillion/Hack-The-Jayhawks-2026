@@ -2,6 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://u6nftnc0kuup" path="res://assets/sprites/testmap.png" id="1_4k8hj"]
 [ext_resource type="Texture2D" uid="uid://xwwccy050a" path="res://assets/sprites/fox.jpg" id="2_2mmkl"]
+[ext_resource type="Texture2D" uid="uid://c73k4q43frenp" path="res://assets/sprites/jayhawk.jpg" id="3_2mmkl"]
+[ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="3_p2a6i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mmkl"]
+size = Vector2(358, 339)
 
 [node name="Node2D" type="Node2D" unique_id=1241262597]
 
@@ -12,6 +17,23 @@ texture = ExtResource("1_4k8hj")
 offset = Vector2(10, 0)
 
 [node name="Foxes" type="Sprite2D" parent="." unique_id=491776441]
-position = Vector2(987, 79)
+position = Vector2(231.00009, 202)
 scale = Vector2(0.14562495, 0.16710758)
 texture = ExtResource("2_2mmkl")
+
+[node name="Jayhawk" type="CharacterBody2D" parent="." unique_id=44848741]
+position = Vector2(117, 315)
+up_direction = Vector2(1, 0)
+script = ExtResource("3_p2a6i")
+
+[node name="JayhawkImage" type="Sprite2D" parent="Jayhawk" unique_id=1691074208]
+position = Vector2(1, -2)
+scale = Vector2(0.16143975, 0.23449619)
+texture = ExtResource("3_2mmkl")
+
+[node name="AimboxArea" type="Area2D" parent="Jayhawk" unique_id=967164173]
+position = Vector2(-7, 8)
+
+[node name="AimboxCollision" type="CollisionShape2D" parent="Jayhawk/AimboxArea" unique_id=1742111712]
+position = Vector2(5, -7)
+shape = SubResource("RectangleShape2D_2mmkl")
