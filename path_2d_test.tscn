@@ -1,25 +1,37 @@
 [gd_scene format=3 uid="uid://ducmhn8mfa5i3"]
 
-[ext_resource type="Script" uid="uid://b4pmk0cojqdao" path="res://Pathfinding.cs" id="1_so8ig"]
-[ext_resource type="Texture2D" uid="uid://cac8iyxqsuubr" path="res://assets/sprites/1912jayhawk.jpg" id="2_e8hf1"]
+[ext_resource type="Script" uid="uid://cafuycxpc2g4s" path="res://src/Pathfinding.cs" id="1_so8ig"]
+[ext_resource type="Texture2D" uid="uid://bvlf0s8fwdaup" path="res://assets/sprites/fox.png" id="2_so8ig"]
 
 [sub_resource type="Curve2D" id="Curve2D_na8xp"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 84.968506, 78.1165, 0, 0, 0, 0, 454, 79, 0, 0, 0, 0, 453, 189, 0, 0, 0, 0, 83, 192, 0, 0, 0, 0, 85, 283, 0, 0, 0, 0, 458, 286)
+"points": PackedVector2Array(-200.8866, 1.9694028, 200.8866, -1.9694028, -37.79841, 88.934105, -91.583145, 58.52671, 91.583145, -58.52671, 466.95227, 94.79165, 97.403564, -72.950615, -97.403564, 72.950615, 512.7082, 242.64459, -107.72632, -247.52046, 107.72632, 247.52046, 151.19363, 493.5843, 0, 0, 0, 0, 687.3342, 401.31516, 153.78877, -445.8012, -153.78877, 445.8012, 948.3846, 367.15234, 0, 0, 0, 0, 1235.4111, 511.37112)
 }
-point_count = 6
+point_count = 7
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_so8ig"]
+size = Vector2(45.80903, 73.365555)
 
 [node name="Path2D" type="Path2D" unique_id=245586761]
-position = Vector2(-2.4426732, 28.730892)
+position = Vector2(-13.000001, -14.999998)
 scale = Vector2(1.0053333, 0.89954233)
 curve = SubResource("Curve2D_na8xp")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=7556846]
-position = Vector2(84.968506, 78.1165)
-rotation = 0.0023940979
+position = Vector2(-37.79841, 88.934105)
+rotation = -0.009803258
 script = ExtResource("1_so8ig")
 
 [node name="Sprite2D" type="Sprite2D" parent="PathFollow2D" unique_id=1370979258]
-position = Vector2(1.0129185, -1.1140862)
-scale = Vector2(0.09721854, 0.11088809)
-texture = ExtResource("2_e8hf1")
+position = Vector2(0.9946461, 0.009764671)
+scale = Vector2(0.47946233, 0.62482846)
+texture = ExtResource("2_so8ig")
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D" unique_id=1621733295]
+position = Vector2(38.668423, -88.559296)
+rotation = 0.009803258
+scale = Vector2(0.99999994, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Area2D" unique_id=286038318]
+position = Vector2(-78.58092, 88.93412)
+shape = SubResource("RectangleShape2D_so8ig")

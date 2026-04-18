@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="HackKU2026Project1"
-run/main_scene="uid://citg2viw3xcv8"
+run/main_scene="uid://ducmhn8mfa5i3"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
