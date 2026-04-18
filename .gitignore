@@ -1,0 +1,14 @@
+# Godot 4+ ignores
+.godot/
+.import/
+/android/
+
+# Export files
+export.cfg
+export_credentials.cfg
+
+# Temp files
+*.tmp
+
+# Translation files
+*.translation
