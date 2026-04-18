@@ -12,3 +12,6 @@ export_credentials.cfg
 
 # Translation files
 *.translation
+path_2d_test.tscn
+project.godot
+Wave_Generator.tscn
