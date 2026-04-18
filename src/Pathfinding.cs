@@ -15,7 +15,7 @@ public partial class Pathfinding : PathFollow2D
 {
     [Export] public float Speed = 100f;             // Units per second
     [Export] public bool Loop = false;              // Loop when reaching the end
-    [Export] public bool Rotate = true;             // Rotate to face path direction
+    [Export] public bool Rotate = false;             // Rotate to face path direction
     [Export] public bool Reverse = false;           // Travel in reverse direction
     [Export] public bool StopOnCollision = false;   // Pause movement on collision
 

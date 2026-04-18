@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://citg2viw3xcv8"]
+
+[ext_resource type="Texture2D" uid="uid://xwwccy050a" path="res://assets/sprites/fox.jpg" id="1_4ofa8"]
+[ext_resource type="Texture2D" uid="uid://tpow8y24qk18" path="res://assets/sprites/mapv1.png" id="1_np0xw"]
+[ext_resource type="Script" uid="uid://cafuycxpc2g4s" path="res://src/Pathfinding.cs" id="2_np0xw"]
+[ext_resource type="Texture2D" uid="uid://c73k4q43frenp" path="res://assets/sprites/jayhawk.jpg" id="4_3wwup"]
+
+[sub_resource type="Curve2D" id="Curve2D_7dhf1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 482, 0, 0, 0, 0, 982, 487, 0, 0, 0, 0, 982, 311, 0, 0, 0, 0, 153, 307, 0, 0, 0, 0, 93, 307, 0, 0, 0, 0, 91, 78, 0, 0, 0, 0, 1058, 67)
+}
+point_count = 7
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nim1l"]
+size = Vector2(162.70224, 126.08229)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odbyl"]
+radius = 105.2503
+
+[node name="Gameloop" type="Node2D" unique_id=380856490]
+
+[node name="Testmap" type="Sprite2D" parent="." unique_id=1516245502]
+position = Vector2(572.475, 312.21295)
+scale = Vector2(4.003646, 3.770307)
+texture = ExtResource("1_np0xw")
+
+[node name="GamePath" type="Path2D" parent="." unique_id=2069844324]
+curve = SubResource("Curve2D_7dhf1")
+
+[node name="PathFollower" type="PathFollow2D" parent="GamePath" unique_id=945081837]
+position = Vector2(152, 482)
+rotation = 0.006024024
+script = ExtResource("2_np0xw")
+
+[node name="Fox" type="AnimatableBody2D" parent="GamePath/PathFollower" unique_id=1975510586]
+position = Vector2(24.132093, 21.855034)
+
+[node name="Fox" type="Sprite2D" parent="GamePath/PathFollower/Fox" unique_id=1688290705]
+position = Vector2(-99.112656, -18.403278)
+scale = Vector2(0.2016145, 0.22363757)
+texture = ExtResource("1_4ofa8")
+
+[node name="FoxBox" type="CollisionShape2D" parent="GamePath/PathFollower/Fox" unique_id=25545298]
+position = Vector2(-98.112656, -18.409313)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_nim1l")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1141873752]
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=1293964434]
+position = Vector2(-206.5, 109.5)
+scale = Vector2(0.29642856, 0.5044843)
+texture = ExtResource("4_3wwup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=558444874]
+position = Vector2(207.25, 147.75)
+shape = SubResource("CircleShape2D_odbyl")
