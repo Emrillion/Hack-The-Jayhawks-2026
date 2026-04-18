@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://c73k4q43frenp" path="res://assets/sprites/jayhawk.jpg" id="3_2mmkl"]
 [ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="3_p2a6i"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2a6i"]
+size = Vector2(794.6997, 582.47235)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mmkl"]
 size = Vector2(358, 339)
 
@@ -16,24 +19,29 @@ scale = Vector2(0.59947914, 0.5935185)
 texture = ExtResource("1_4k8hj")
 offset = Vector2(10, 0)
 
-[node name="Foxes" type="Sprite2D" parent="." unique_id=491776441]
-position = Vector2(231.00009, 202)
+[node name="Fox" type="StaticBody2D" parent="." unique_id=1667359910]
+position = Vector2(287.0001, 202)
 scale = Vector2(0.14562495, 0.16710758)
+
+[node name="FoxSprite" type="Sprite2D" parent="Fox" unique_id=491776441]
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_2mmkl")
+
+[node name="FoxCollision" type="CollisionShape2D" parent="Fox" unique_id=1804270582]
+position = Vector2(-13.734349, -5.9842424)
+scale = Vector2(0.9999999, 0.99999976)
+shape = SubResource("RectangleShape2D_p2a6i")
 
 [node name="Jayhawk" type="CharacterBody2D" parent="." unique_id=44848741]
 position = Vector2(117, 315)
 up_direction = Vector2(1, 0)
 script = ExtResource("3_p2a6i")
 
+[node name="AimboxCollision" type="CollisionShape2D" parent="Jayhawk" unique_id=1742111712]
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_2mmkl")
+
 [node name="JayhawkImage" type="Sprite2D" parent="Jayhawk" unique_id=1691074208]
 position = Vector2(1, -2)
 scale = Vector2(0.16143975, 0.23449619)
 texture = ExtResource("3_2mmkl")
-
-[node name="AimboxArea" type="Area2D" parent="Jayhawk" unique_id=967164173]
-position = Vector2(-7, 8)
-
-[node name="AimboxCollision" type="CollisionShape2D" parent="Jayhawk/AimboxArea" unique_id=1742111712]
-position = Vector2(5, -7)
-shape = SubResource("RectangleShape2D_2mmkl")
