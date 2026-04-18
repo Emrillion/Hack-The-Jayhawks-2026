@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.ComponentModel;
 
-public partial class JayHawkBasic : CharacterBody2D 
+public partial class JayHawkBasic : AnimatableBody2D 
 {
 	// Called when the node enters the scene tree for the first time.
 	private float fireDelay =- 1;
@@ -10,7 +10,7 @@ public partial class JayHawkBasic : CharacterBody2D
 	public override void _Ready()
 	{
 		GD.Print("hello");
-		var area = GetNode<Area2D>("Area2D");
+		var area = GetNode<Area2D>("AreaObj");
         area.BodyEntered += OnBodyEntered;//awful c# syntax to
         area.BodyExited += OnBodyExited;//subscribe to events
 
