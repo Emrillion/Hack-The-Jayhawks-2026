@@ -6,23 +6,29 @@ public partial class JayHawkBasic : AnimatableBody2D
 {
 	// Called when the node enters the scene tree for the first time.
 	private float fireDelay =- 1;
-	private PackedScene _foxScene;
+	private PackedScene _featherScene;
 	//let's init ours
 	public override void _Ready()
 	{
-		_foxScene = GD.Load<PackedScene>("res://src/JayHawkBasic.tscn");
+		_featherScene = GD.Load<PackedScene>("res://scenes/feather.tscn");
+		if (_featherScene == null){GD.Print("PATH IS NULLL ERROR");}
 		GD.Print("hello");
 		var area = GetNode<Area2D>("AreaObj");
-        area.BodyEntered += OnBodyEntered;//awful c# syntax to
-        area.BodyExited += OnBodyExited;//subscribe to events
-
+        area.AreaEntered += OnAreaEntered;//awful c# syntax to
+		    GD.Print("signal hooked");
 	}
-    private void OnBodyEntered(Node2D body)
+    private void OnAreaEntered(Area2D area)
 	{
-		GD.Print(body.Name);
-		if (body.Name == "Fox")
+		GD.Print(area.Name);
+		if (area.Name == "Fox")
 		{
-			body.QueueFree();//delete that fox next frame
+			GD.Print("made feather");
+			var feather = _featherScene.Instantiate<Feather>();
+			feather.Init(area.Position.X, area.Position.Y);
+    		GetParent().AddChild(feather);
+GD.Print("feather pos: ", feather.Position);
+GD.Print("feather parent: ", feather.GetParent().Name);
+
 		}
 	}
 

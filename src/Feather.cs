@@ -17,6 +17,12 @@ public partial class Feather: AnimatableBody2D
         area.BodyExited += OnBodyExited;//subscribe to events
 
 	}
+    public void Init(float dX, float dY)
+    {
+        directionX = dX;
+        directionY = dY;
+    }
+
     private void OnBodyEntered(Node2D body)
 	{
 		GD.Print(body.Name);
@@ -33,6 +39,7 @@ public partial class Feather: AnimatableBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
     {
+        //stupid stupid code
         if (directionX > Position.X)
         {
             Position = new Godot.Vector2(Position.X + (float) delta, Position.Y);
