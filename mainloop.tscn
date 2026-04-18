@@ -11,13 +11,31 @@ position = Vector2(166, 215)
 scale = Vector2(0.47968745, 0.47878483)
 texture = ExtResource("1_cvfxx")
 script = ExtResource("2_4k8hj")
+[ext_resource type="Texture2D" uid="uid://u6nftnc0kuup" path="res://assets/sprites/testmap.png" id="1_4k8hj"]
+[ext_resource type="Texture2D" uid="uid://xwwccy050a" path="res://assets/sprites/fox.jpg" id="2_2mmkl"]
+[ext_resource type="Script" uid="uid://cpw27yqhafctg" path="res://src/StupidTestFox.cs" id="2_sx7qi"]
+[ext_resource type="Texture2D" uid="uid://c73k4q43frenp" path="res://assets/sprites/jayhawk.jpg" id="3_2mmkl"]
+[ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="3_p2a6i"]
 
-[node name="Label" type="Label" parent="." unique_id=31850084]
-offset_left = 347.0
-offset_top = 150.0
-offset_right = 577.0
-offset_bottom = 289.0
-text = "Good morning gentlemen. I learned Godot.
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2a6i"]
+size = Vector2(794.6997, 582.47235)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx7qi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mmkl"]
+size = Vector2(358, 339)
+
+[node name="Node2D" type="Node2D" unique_id=1241262597]
+
+[node name="TestMap" type="Sprite2D" parent="." unique_id=103422978]
+position = Vector2(569, 321.00003)
+scale = Vector2(0.59947914, 0.5935185)
+texture = ExtResource("1_4k8hj")
+offset = Vector2(10, 0)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1045496786]
+position = Vector2(114, 319)
+script = ExtResource("2_sx7qi")
 
 Sincerely, 
 Sexy Legs Jayhawk"
@@ -30,3 +48,33 @@ position = Vector2(84.968506, 78.1165)
 rotation = 0.0023940979
 
 [node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D2" unique_id=1779981606]
+[node name="FoxSprite" type="Sprite2D" parent="AnimatableBody2D" unique_id=491776441]
+position = Vector2(309.0001, -116.999985)
+scale = Vector2(0.14562494, 0.16710755)
+texture = ExtResource("2_2mmkl")
+
+[node name="FoxCollision" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1804270582]
+position = Vector2(310, -117)
+scale = Vector2(0.14562494, 0.16710752)
+shape = SubResource("RectangleShape2D_p2a6i")
+
+[node name="Jayhawk" type="CharacterBody2D" parent="." unique_id=44848741]
+position = Vector2(117, 315)
+up_direction = Vector2(1, 0)
+script = ExtResource("3_p2a6i")
+
+[node name="stupidPhysicsUgh" type="CollisionShape2D" parent="Jayhawk" unique_id=538758839]
+position = Vector2(1, -2)
+scale = Vector2(0.16143975, 0.23449619)
+shape = SubResource("RectangleShape2D_sx7qi")
+
+[node name="JayhawkImage" type="Sprite2D" parent="Jayhawk" unique_id=1691074208]
+position = Vector2(1, -2)
+scale = Vector2(0.16143975, 0.23449619)
+texture = ExtResource("3_2mmkl")
+
+[node name="AimboxArea" type="Area2D" parent="Jayhawk" unique_id=509041701]
+
+[node name="AimboxCollision" type="CollisionShape2D" parent="Jayhawk/AimboxArea" unique_id=1742111712]
+position = Vector2(-3, 4)
+shape = SubResource("RectangleShape2D_2mmkl")

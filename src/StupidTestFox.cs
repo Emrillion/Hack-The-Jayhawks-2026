@@ -1,9 +1,9 @@
 using Godot;
 using System;
+using System.Numerics;
 
-public partial class Movement: Sprite2D 
+public partial class StupidTestFox : AnimatableBody2D 
 {
-	[Export] public float RotationSpeed = 1.0f;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -12,6 +12,6 @@ public partial class Movement: Sprite2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Rotation += (float) delta * RotationSpeed;
+		Position += new Godot.Vector2(-(float) delta*100, 0);
 	}
 }
