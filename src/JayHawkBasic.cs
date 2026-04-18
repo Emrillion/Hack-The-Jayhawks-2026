@@ -17,20 +17,18 @@ public partial class JayHawkBasic : AnimatableBody2D
         area.AreaEntered += OnAreaEntered;//awful c# syntax to
 		    GD.Print("signal hooked");
 	}
-    private void OnAreaEntered(Area2D area)
-	{
-		GD.Print(area.Name);
-		if (area.Name == "Fox")
-		{
-			GD.Print("made feather");
-			var feather = _featherScene.Instantiate<Feather>();
-			feather.Init(area.Position.X, area.Position.Y);
-    		GetParent().AddChild(feather);
-GD.Print("feather pos: ", feather.Position);
-GD.Print("feather parent: ", feather.GetParent().Name);
-
-		}
-	}
+private void OnAreaEntered(Area2D area)
+{
+    GD.Print(area.Name);
+    if (area.Name == "Fox")
+    {
+        GD.Print("made feather");
+        var feather = _featherScene.Instantiate<Feather>();
+        feather.Init(area.GetParent<Node2D>()); // pass the fox node
+        GetParent().AddChild(feather);
+        feather.GlobalPosition = GlobalPosition; // spawn at jayhawk
+    }
+}
 
     private void OnBodyExited(Node2D body)
 	{

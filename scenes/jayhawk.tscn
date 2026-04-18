@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="1_nqic8"]
 [ext_resource type="Texture2D" uid="uid://di847tlopg22s" path="res://assets/sprites/1rbtq8p.png" id="2_ny5cg"]
+[ext_resource type="Texture2D" uid="uid://bvlf0s8fwdaup" path="res://assets/sprites/fox.png" id="3_2lqaf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewffm"]
 radius = 15.004166
@@ -9,12 +10,16 @@ radius = 15.004166
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahj8n"]
 radius = 109.55364
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2lqaf"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_y845f"]
+radius = 32.0
 
 [node name="Jayhawk" type="Node2D" unique_id=1261572074]
 
 [node name="JayhawkProto" type="AnimatableBody2D" parent="." unique_id=679833203]
 position = Vector2(282, 142)
+sync_to_physics = false
 script = ExtResource("1_nqic8")
 
 [node name="JayhawkSprite" type="Sprite2D" parent="JayhawkProto" unique_id=105007555]
@@ -33,8 +38,19 @@ position = Vector2(2, 33)
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_ahj8n")
 
-[node name="Fox" type="Area2D" parent="." unique_id=800145873]
+[node name="Fox" type="AnimatableBody2D" parent="." unique_id=564795723]
+sync_to_physics = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fox" unique_id=764440325]
-position = Vector2(224, 137)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fox" unique_id=2044286071]
+shape = SubResource("CircleShape2D_2lqaf")
+
+[node name="Fox" type="Area2D" parent="Fox" unique_id=800145873]
+
+[node name="FoxCollider" type="CollisionShape2D" parent="Fox/Fox" unique_id=764440325]
+position = Vector2(224, 139)
 shape = SubResource("CircleShape2D_y845f")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fox/Fox" unique_id=57794431]
+position = Vector2(224.00002, 138)
+scale = Vector2(0.14666675, 0.16333336)
+texture = ExtResource("3_2lqaf")

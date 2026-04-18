@@ -3,59 +3,48 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 
-public partial class Feather: AnimatableBody2D 
+public partial class Feather : AnimatableBody2D
 {
-	// Called when the node enters the scene tree for the first time.
-	//let's init ours
-    [Export] public float directionX;
-    [Export] public float directionY;
-	public override void _Ready()
-	{
-		GD.Print("hello");
-		var area = GetNode<Area2D>("FeatherArea2D");
-        area.BodyEntered += OnBodyEntered;//awful c# syntax to
-        area.BodyExited += OnBodyExited;//subscribe to events
+    private Node2D _target;
+    private float _speed = 100f;
 
-	}
-    public void Init(float dX, float dY)
+    public override void _Ready()
     {
-        directionX = dX;
-        directionY = dY;
+        GD.Print("feather ready");
+        var area = GetNode<Area2D>("FeatherArea2D");
+        area.AreaEntered += OnAreaEntered;
+        area.BodyExited += OnBodyExited;
     }
 
-    private void OnBodyEntered(Node2D body)
-	{
-		GD.Print(body.Name);
-		if (body.Name == "Fox")
-		{
-            QueueFree();//queuefrees itself
-		}
-	}
+    public void Init(Node2D target)
+    {
+        _target = target;
+    }
+
+public override void _PhysicsProcess(double delta)
+{
+    if (_target == null || !IsInstanceValid(_target))
+    {
+        QueueFree();
+        return;
+    }
+    Vector2 direction = (_target.GlobalPosition - GlobalPosition).Normalized();
+    MoveAndCollide(direction * _speed * (float)delta);
+    Rotation = direction.Angle() + Mathf.Pi / 2;
+}
+
+    private void OnAreaEntered(Area2D area)
+    {
+    GD.Print("area parent name: " + area.GetParent().Name);
+    if (area.GetParent().Name == "Fox")
+    {
+        area.GetParent().QueueFree();
+        QueueFree();
+    }
+    }
 
     private void OnBodyExited(Node2D body)
-	{
-		;//implement later
-	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
     {
-        //stupid stupid code
-        if (directionX > Position.X)
-        {
-            Position = new Godot.Vector2(Position.X + (float) delta, Position.Y);
-        }
-        if (directionX < Position.X) {
-            Position = new Godot.Vector2(Position.X - (float) delta, Position.Y);
-        }
-
-        if (directionY > Position.X)
-        {
-            Position = new Godot.Vector2(Position.X , Position.Y + (float) delta);
-        }
-        if (directionX < Position.X) {
-            Position = new Godot.Vector2(Position.X, Position.Y - (float) delta);
-        }
-        
-        
+        ;
     }
 }
