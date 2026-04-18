@@ -7,8 +7,8 @@ public partial class Feather: AnimatableBody2D
 {
 	// Called when the node enters the scene tree for the first time.
 	//let's init ours
-    private int directionX = 0;
-    private int directionY=0;
+    [Export] public float directionX;
+    [Export] public float directionY;
 	public override void _Ready()
 	{
 		GD.Print("hello");
@@ -22,7 +22,6 @@ public partial class Feather: AnimatableBody2D
 		GD.Print(body.Name);
 		if (body.Name == "Fox")
 		{
-			body.QueueFree();//delete that fox next frame
             QueueFree();//queuefrees itself
 		}
 	}
@@ -34,6 +33,22 @@ public partial class Feather: AnimatableBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
     {
+        if (directionX > Position.X)
+        {
+            Position = new Godot.Vector2(Position.X + (float) delta, Position.Y);
+        }
+        if (directionX < Position.X) {
+            Position = new Godot.Vector2(Position.X - (float) delta, Position.Y);
+        }
+
+        if (directionY > Position.X)
+        {
+            Position = new Godot.Vector2(Position.X , Position.Y + (float) delta);
+        }
+        if (directionX < Position.X) {
+            Position = new Godot.Vector2(Position.X, Position.Y - (float) delta);
+        }
+        
         
     }
 }

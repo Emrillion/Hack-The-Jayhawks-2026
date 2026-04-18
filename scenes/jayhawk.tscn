@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dufq1tngwww2w"]
+[gd_scene format=3 uid="uid://bffgs6ea1xq4s"]
 
 [ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="1_nqic8"]
 [ext_resource type="Texture2D" uid="uid://di847tlopg22s" path="res://assets/sprites/1rbtq8p.png" id="2_ny5cg"]
