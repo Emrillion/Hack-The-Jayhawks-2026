@@ -1,22 +1,17 @@
 [gd_scene format=3 uid="uid://ci4k3n6fpqwcw"]
 
-[ext_resource type="Texture2D" uid="uid://cac8iyxqsuubr" path="res://assets/sprites/1912jayhawk.jpg" id="1_cvfxx"]
-[ext_resource type="Script" uid="uid://b47inr5jm3v8x" path="res://Movement.cs" id="2_4k8hj"]
+[ext_resource type="Texture2D" uid="uid://u6nftnc0kuup" path="res://assets/sprites/testmap.png" id="1_4k8hj"]
+[ext_resource type="Texture2D" uid="uid://xwwccy050a" path="res://assets/sprites/fox.jpg" id="2_2mmkl"]
 
 [node name="Node2D" type="Node2D" unique_id=1241262597]
 
-[node name="Hello World Guy" type="Sprite2D" parent="." unique_id=878938526]
-position = Vector2(163, 216)
-scale = Vector2(0.47968745, 0.47878483)
-texture = ExtResource("1_cvfxx")
-script = ExtResource("2_4k8hj")
+[node name="TestMap" type="Sprite2D" parent="." unique_id=103422978]
+position = Vector2(572.5052, 323.49997)
+scale = Vector2(0.59947914, 0.5935185)
+texture = ExtResource("1_4k8hj")
+offset = Vector2(10, 0)
 
-[node name="Label" type="Label" parent="." unique_id=31850084]
-offset_left = 347.0
-offset_top = 150.0
-offset_right = 577.0
-offset_bottom = 289.0
-text = "Good morning gentlemen. I learned Godot.
-
-Sincerely, 
-Sexy Legs Jayhawk"
+[node name="Foxes" type="Sprite2D" parent="." unique_id=491776441]
+position = Vector2(987, 79)
+scale = Vector2(0.14562495, 0.16710758)
+texture = ExtResource("2_2mmkl")
