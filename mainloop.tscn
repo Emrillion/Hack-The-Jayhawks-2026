@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ci4k3n6fpqwcw"]
+
+[ext_resource type="Texture2D" uid="uid://cac8iyxqsuubr" path="res://assets/sprites/1912jayhawk.jpg" id="1_cvfxx"]
+
+[node name="Node2D" type="Node2D" unique_id=1241262597]
+
+[node name="Hello World Guy" type="Sprite2D" parent="." unique_id=878938526]
+position = Vector2(163, 216)
+scale = Vector2(0.47968745, 0.47878483)
+texture = ExtResource("1_cvfxx")
+
+[node name="Label" type="Label" parent="." unique_id=31850084]
+offset_left = 347.0
+offset_top = 150.0
+offset_right = 577.0
+offset_bottom = 289.0
+text = "Good morning gentlemen. I learned Godot"
