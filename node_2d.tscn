@@ -1,3 +1,20 @@
 [gd_scene format=3 uid="uid://cj6nm8y2xb238"]
 
+[ext_resource type="PackedScene" uid="uid://ducmhn8mfa5i3" path="res://path_2d_test.tscn" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://cafuycxpc2g4s" path="res://src/Pathfinding.cs" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://cac8iyxqsuubr" path="res://assets/sprites/1912jayhawk.jpg" id="3_0hol4"]
+
 [node name="Node2D" type="Node2D" unique_id=1444742759]
+
+[node name="Path2D" parent="." unique_id=245586761 instance=ExtResource("1_wtcfe")]
+position = Vector2(-44.999996, -18.999996)
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Path2D" unique_id=415189169]
+position = Vector2(84.968506, 78.1165)
+rotation = 0.0023940979
+script = ExtResource("2_epypp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D2" unique_id=358252706]
+position = Vector2(1.0129185, -1.1140862)
+scale = Vector2(0.09721854, 0.11088809)
+texture = ExtResource("3_0hol4")
