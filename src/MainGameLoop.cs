@@ -6,13 +6,15 @@ public partial class MainGameLoop : Node2D
 	private PackedScene _foxScene = GD.Load<PackedScene>("res://scenes/fox.tscn");
 	private PackedScene _jayhawkScene = GD.Load<PackedScene>("res://scenes/jayhawk.tscn");
 	private PackedScene _jayhawkTwoScene = GD.Load<PackedScene>("res://scenes/jayhawktwo.tscn");
+
 	private Path2D _path;
 	private float _spawnTimer = 0f;
 	private float _spawnInterval = 2f;
 	private uint heartsLeft = 10;
 	private uint selectedTroop;
 	private JayHawkTwo _selectedJayhawk;
-
+	private uint _coins = 0;
+	private WaveSpawner waveSpawnInstance;
 	// Question system
 	private AcceptDialog _dialog;
 	private LineEdit _answerInput;
@@ -28,6 +30,10 @@ public partial class MainGameLoop : Node2D
 
 	public override void _Ready()
 	{
+		var music = GetNode<AudioStreamPlayer2D>("MusicLoop");
+		music.Play();
+		waveSpawnInstance = GetNode<WaveSpawner>("WaveSpawner"); // adjust path as needed
+		waveSpawnInstance.EnemyKilled += OnFoxKilled;
 		// Troop selection buttons
 		GetNode<Button>("CanvasLayer/Troop0").Pressed += () => selectedTroop = 1;
 		GetNode<Button>("CanvasLayer/Troop1").Pressed += () => selectedTroop = 2;
@@ -61,20 +67,33 @@ public partial class MainGameLoop : Node2D
 							 $"C: {_currentQuestion.C}\n" +
 							 $"D: {_currentQuestion.D}";
 
-		// Add text input
 		_answerInput = new LineEdit();
-		_answerInput.PlaceholderText = "Type A, B, C, or D";
 		_answerInput.MaxLength = 1;
 		_dialog.AddChild(_answerInput);
 
+		// Always unsubscribe before subscribing to prevent stacking
+		_dialog.Confirmed -= SubmitAnswer;
+		_dialog.Canceled -= OnDialogCanceled;
+
 		_dialog.Confirmed += SubmitAnswer;
+		_dialog.Canceled += OnDialogCanceled;
 
 		_dialog.PopupCentered();
+	}
+
+	private void OnDialogCanceled()
+	{
+		_dialog.Confirmed -= SubmitAnswer;
+		_dialog.Canceled -= OnDialogCanceled;
+		_waitingForAnswer = false;
+		GD.Print("dialog cancelled, troop not placed");
 	}
 
 	private void SubmitAnswer()
 	{
 		_dialog.Confirmed -= SubmitAnswer;
+		_dialog.Canceled -= OnDialogCanceled;
+
 		string input = _answerInput.Text.Trim().ToUpper();
 
 		int answer = input switch
@@ -111,15 +130,18 @@ public partial class MainGameLoop : Node2D
 		_waitingForAnswer = false;
 	}
 
-public override void _Input(InputEvent @event)
+	public override void _Input(InputEvent @event)
 {
 	if (@event is InputEventMouseButton mouse &&
 		mouse.ButtonIndex == MouseButton.Left &&
 		mouse.Pressed &&
 		!_waitingForAnswer)
 	{
-		// This is the most reliable UI-click guard in Godot 4
 		if (GetViewport().IsInputHandled())
+			return;
+
+		// Block if mouse is over any Control node (buttons, UI, etc.)
+		if (IsMouseOverUI())
 			return;
 
 		var mousePos = GetGlobalMousePosition();
@@ -136,6 +158,19 @@ public override void _Input(InputEvent @event)
 	}
 }
 
+private bool IsMouseOverUI()
+{
+	var mousePos = GetViewport().GetMousePosition();
+	foreach (var node in GetNode("CanvasLayer").GetChildren())
+	{
+		if (node is Control control && control.Visible)
+		{
+			if (control.GetGlobalRect().HasPoint(mousePos))
+				return true;
+		}
+	}
+	return false;
+}
 	private JayHawkTwo GetJayhawkAtPosition(Vector2 pos)
 	{
 		foreach (var child in GetChildren())
@@ -154,7 +189,11 @@ public override void _Input(InputEvent @event)
 		if (_selectedJayhawk != null && IsInstanceValid(_selectedJayhawk))
 			_selectedJayhawk.Upgrade();
 	}
-
+private void OnFoxKilled()
+{
+	_coins += 10;
+	GD.Print("fox killed! coins: ", _coins);
+}
 	private void PlaceTroop(Vector2 position)
 	{
 		if (selectedTroop == 0)

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cxwcwft8xvm7c" path="res://assets/sprites/bigjay.png" id="5_iblqc"]
 [ext_resource type="Texture2D" uid="uid://cu567bybbaygm" path="res://assets/sprites/select.png" id="6_nim1l"]
 [ext_resource type="PackedScene" uid="uid://diwfj0fj1jp2q" path="res://scenes/fox.tscn" id="6_ukq5c"]
+[ext_resource type="AudioStream" uid="uid://d2cyvvxhrop2r" path="res://assets/music.mp3" id="9_a6wvu"]
 
 [sub_resource type="Curve2D" id="Curve2D_7dhf1"]
 _data = {
@@ -157,3 +158,8 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
 script = ExtResource("1_iblqc")
 EnemyScene = ExtResource("6_ukq5c")
 Path2DPath = NodePath("../GamePath")
+
+[node name="MusicLoop" type="AudioStreamPlayer2D" parent="." unique_id=1765892562]
+stream = ExtResource("9_a6wvu")
+pitch_scale = 0.78
+autoplay = true

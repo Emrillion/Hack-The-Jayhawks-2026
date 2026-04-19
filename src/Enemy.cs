@@ -27,12 +27,11 @@ public partial class Enemy : PathFollow2D
 	[Export] public Texture2D Green_Fox { get; set; }
 	[Export] public Texture2D Blue_Fox { get; set; }
 	[Export] public Texture2D Grey_Fox { get; set; }
-
+[Signal] public delegate void KilledEventHandler();
 	private Sprite2D _sprite;
-
 	private Area2D _area;
 	public override void _Ready()
-	{
+	{		
 		_sprite = GetNode<Sprite2D>("Sprite2D");
 		_currentHealth = MaxHealth;
 
@@ -127,8 +126,12 @@ public partial class Enemy : PathFollow2D
 		_currentHealth -= DamageValue;
 		if (_currentHealth <= 0)
 		{
+			EmitSignal(SignalName.Killed);
+
+			var deathSound = GetNode<AudioStreamPlayer2D>("DeathSound");
+			deathSound.Play();
 			GD.Print("fox dying");
-			QueueFree();
+			deathSound.Finished += QueueFree;
 		}
 		UpdateSprite();
 	}
