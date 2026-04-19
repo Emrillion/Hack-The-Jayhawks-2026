@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="1_nqic8"]
 [ext_resource type="Texture2D" uid="uid://di847tlopg22s" path="res://assets/sprites/1rbtq8p.png" id="2_ny5cg"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nqic8"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ewffm"]
 radius = 15.004166
 
@@ -10,6 +12,12 @@ radius = 15.004166
 radius = 109.55364
 
 [node name="Jayhawk" type="Node2D" unique_id=1261572074]
+
+[node name="Fox" type="Area2D" parent="." unique_id=1727662339]
+position = Vector2(234, 118)
+
+[node name="Fox" type="CollisionShape2D" parent="Fox" unique_id=481181287]
+shape = SubResource("CircleShape2D_nqic8")
 
 [node name="JayhawkProto" type="AnimatableBody2D" parent="." unique_id=679833203]
 position = Vector2(282, 142)

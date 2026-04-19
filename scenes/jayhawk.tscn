@@ -9,6 +9,8 @@ radius = 15.004166
 [sub_resource type="CircleShape2D" id="CircleShape2D_ahj8n"]
 radius = 109.55364
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y845f"]
+
 [node name="Jayhawk" type="Node2D" unique_id=1261572074]
 
 [node name="JayhawkProto" type="AnimatableBody2D" parent="." unique_id=679833203]
@@ -30,3 +32,9 @@ position = Vector2(2, 33)
 [node name="Area Collision" type="CollisionShape2D" parent="JayhawkProto/AreaObj" unique_id=70723184]
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_ahj8n")
+
+[node name="Fox" type="Area2D" parent="." unique_id=800145873]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fox" unique_id=764440325]
+position = Vector2(224, 137)
+shape = SubResource("CircleShape2D_y845f")
