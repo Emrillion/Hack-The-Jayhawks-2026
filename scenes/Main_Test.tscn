@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://d1wee0b1kug4c"]
+
+[ext_resource type="Script" uid="uid://l08a2td61by6" path="res://src/Main_Test.cs" id="1_x5kud"]
+[ext_resource type="Script" uid="uid://bj8luil6ujb8h" path="res://src/WaveSpawner.cs" id="2_87tqn"]
+[ext_resource type="PackedScene" uid="uid://ducmhn8mfa5i3" path="res://scenes/Enemy.tscn" id="3_27til"]
+
+[sub_resource type="Curve2D" id="Curve2D_j3ni7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -3, 498, 0, 0, 0, 0, 747, 498, 0, 0, 0, 0, 750, 293, 0, 0, 0, 0, 179, 291, 0, 0, 0, 0, 177, 83, 0, 0, 0, 0, 1150, 86)
+}
+point_count = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_x5kud"]
+
+[node name="Node2D" type="Node2D" unique_id=1074826509]
+script = ExtResource("1_x5kud")
+
+[node name="GamePath" type="Path2D" parent="." unique_id=844198693]
+curve = SubResource("Curve2D_j3ni7")
+
+[node name="WaveSpawner" type="Node2D" parent="." unique_id=1424258730]
+script = ExtResource("2_87tqn")
+EnemyScene = ExtResource("3_27til")
+Path2DPath = NodePath("../GamePath")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=652043020]
+
+[node name="Pause" type="Button" parent="CanvasLayer" unique_id=1145378343]
+anchors_preset = -1
+offset_left = 872.0
+offset_top = 257.0
+offset_right = 973.0
+offset_bottom = 313.0
+text = "Pause"
+
+[node name="Resume" type="Button" parent="CanvasLayer" unique_id=1833327864]
+offset_left = 869.0
+offset_top = 193.0
+offset_right = 973.0
+offset_bottom = 249.0
+text = "Resume"
+
+[node name="CountdownLabel" type="Label" parent="CanvasLayer" unique_id=1651417175]
+offset_left = 339.0
+offset_top = 172.0
+offset_right = 508.0
+offset_bottom = 195.0
+label_settings = SubResource("LabelSettings_x5kud")
+
+[node name="SkipButton" type="Button" parent="CanvasLayer" unique_id=722771585]
+offset_left = 870.0
+offset_top = 321.0
+offset_right = 976.0
+offset_bottom = 382.0
+text = "Skip"

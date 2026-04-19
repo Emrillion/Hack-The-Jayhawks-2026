@@ -20,6 +20,7 @@ public partial class Enemy : PathFollow2D
 
     // Emitted when an Area2D or PhysicsBody2D enters the child Area2D
     [Signal] public delegate void HitDetectedEventHandler(Node body);
+    [Signal] public delegate void ReachedEndEventHandler();
 
     // Different textures
     [Export] public Texture2D Red_Fox { get; set; }
@@ -83,7 +84,7 @@ public partial class Enemy : PathFollow2D
     {
         GD.Print("Enemy reached the end!");
         // Add code to make the player take damage
-
+        EmitSignal(SignalName.ReachedEnd);
         // Kind of deletes the object
         QueueFree();
     }

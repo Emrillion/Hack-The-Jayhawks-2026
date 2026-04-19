@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ducmhn8mfa5i3"]
+
+[ext_resource type="Script" uid="uid://cafuycxpc2g4s" path="res://src/Enemy.cs" id="1_55jtl"]
+[ext_resource type="Texture2D" uid="uid://bvlf0s8fwdaup" path="res://assets/sprites/fox.png" id="2_mpr68"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7bn3"]
+size = Vector2(54.31475, 78.37686)
+
+[node name="PathFollow2D" type="PathFollow2D" unique_id=1817911850]
+script = ExtResource("1_55jtl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1146074779]
+position = Vector2(5.5174866, -0.92618614)
+scale = Vector2(0.53976685, 0.6123491)
+texture = ExtResource("2_mpr68")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=600127734]
+position = Vector2(38.668423, -88.559296)
+rotation = 0.009803258
+scale = Vector2(0.99999994, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1936908799]
+position = Vector2(-34.545494, 91.44959)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_s7bn3")
