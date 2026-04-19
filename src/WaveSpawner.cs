@@ -13,6 +13,8 @@ public partial class WaveSpawner : Node2D
 	[Signal] public delegate void WaveStartedEventHandler(int waveNumber);
 	[Signal] public delegate void AllWavesCompleteEventHandler();
 [Signal] public delegate void EnemyKilledEventHandler();
+[Signal] public delegate void EnemyReachedEndEventHandler();
+
 	private Path2D _path2D;
 
 	private struct WaveData
@@ -159,10 +161,14 @@ private void SpawnEnemy()
 	enemy.MaxHealth = _waves[_currentWave].MaxHealth;
 	enemy.Scale = new Vector2(0.5f, 0.5f);
 	enemy.Progress = 0f;
-	enemy.Killed += OnEnemyKilled; // add this
+	enemy.Killed += OnEnemyKilled;
+	enemy.ReachedEnd += OnEnemyReachedEnd; // add this
 	_path2D.AddChild(enemy);
 }
-
+private void OnEnemyReachedEnd()
+{
+	EmitSignal(SignalName.EnemyReachedEnd);
+}
 private void OnEnemyKilled()
 {
 	EmitSignal(SignalName.EnemyKilled);

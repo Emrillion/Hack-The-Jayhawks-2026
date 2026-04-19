@@ -2,17 +2,35 @@ using Godot;
 using System;
 using System.ComponentModel;
 
-public partial class JayHawkThree: AnimatableBody2D
+public partial class JayHawkFour: AnimatableBody2D
 {
 	private float fireDelay = 0f;
-	private float fireRate = 3;
+	private float fireRate = 0.2f;
+	private uint damageOfFeather = 1;
+	private int upgradeLevel = 0;
+	private JayHawkTwo _selectedJayhawk;
+
 	private PackedScene _featherScene;
 	private Node2D _currentTarget;
-	public int upgradeLevel;
+public void Explode()
+{
+	if (_currentTarget == null || !IsInstanceValid(_currentTarget)) return;
+
+	for (int i = 0; i < 10; i++)
+	{
+		var feather = _featherScene.Instantiate<Feather>();
+		feather.damage = damageOfFeather;
+		feather.Init(_currentTarget);
+		GetParent().AddChild(feather);
+		feather.GlobalPosition = GlobalPosition;
+	}
+	GD.Print("exploded!");
+}
 	public override void _Ready()
 	{
 		_featherScene = GD.Load<PackedScene>("res://scenes/feather.tscn");
 		if (_featherScene == null) { GD.Print("PATH IS NULL ERROR"); }
+		GD.Print("JayHawkTwo ready");
 
 		var area = GetNode<Area2D>("AreaObj");
 		area.AreaEntered += OnAreaEntered;
@@ -25,11 +43,11 @@ public void Upgrade()
 	switch (upgradeLevel)
 	{
 		case 1:
-			fireRate = 4;
+			damageOfFeather = 2;
 			GD.Print("upgraded fire rate");
 			break;
 		case 2:
-			fireRate = 3;
+			damageOfFeather = 3;
 			GD.Print("upgraded fire rate again");
 			break;
 		case 3:
@@ -58,12 +76,7 @@ public void Upgrade()
 		if (_currentTarget != null && IsInstanceValid(_currentTarget) && fireDelay <= 0)
 		{
 			fireDelay = fireRate;
-			var feather = _featherScene.Instantiate<Feather>();
-			feather.damage = 10;
-			feather.Init(_currentTarget);
-			GetParent().AddChild(feather);
-			feather.GlobalPosition = GlobalPosition;
-			GD.Print("fired feather");
+			Explode();
 		}
 	}
 }

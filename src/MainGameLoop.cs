@@ -6,6 +6,8 @@ public partial class MainGameLoop : Node2D
 	private PackedScene _foxScene = GD.Load<PackedScene>("res://scenes/fox.tscn");
 	private PackedScene _jayhawkScene = GD.Load<PackedScene>("res://scenes/jayhawk.tscn");
 	private PackedScene _jayhawkTwoScene = GD.Load<PackedScene>("res://scenes/jayhawktwo.tscn");
+	private PackedScene _jayhawkThreeScene = GD.Load<PackedScene>("res://scenes/jayhawkthree.tscn");
+	private PackedScene _jayhawkFourScene = GD.Load<PackedScene>("res://scenes/jayhawkfour.tscn");
 
 	private Path2D _path;
 	private float _spawnTimer = 0f;
@@ -13,8 +15,9 @@ public partial class MainGameLoop : Node2D
 	private uint heartsLeft = 10;
 	private uint selectedTroop;
 	private JayHawkTwo _selectedJayhawk;
-	private uint _coins = 0;
+	private uint _coins = 50;
 	private WaveSpawner waveSpawnInstance;
+	private Label coinText;
 	// Question system
 	private AcceptDialog _dialog;
 	private LineEdit _answerInput;
@@ -27,13 +30,19 @@ public partial class MainGameLoop : Node2D
 	private Question _currentQuestion;
 	private Vector2 _pendingPlacePosition;
 	private bool _waitingForAnswer = false;
+private TextureRect _gameOverScreen;
 
 	public override void _Ready()
 	{
 		var music = GetNode<AudioStreamPlayer2D>("MusicLoop");
 		music.Play();
+		coinText = GetNode<Label>("CoinLabel");
 		waveSpawnInstance = GetNode<WaveSpawner>("WaveSpawner"); // adjust path as needed
 		waveSpawnInstance.EnemyKilled += OnFoxKilled;
+		waveSpawnInstance.EnemyReachedEnd += OnFoxReachedEnd;
+
+		_gameOverScreen = GetNode<TextureRect>("UI/GameOver");
+		_gameOverScreen.Visible = false;
 		// Troop selection buttons
 		GetNode<Button>("CanvasLayer/Troop0").Pressed += () => selectedTroop = 1;
 		GetNode<Button>("CanvasLayer/Troop1").Pressed += () => selectedTroop = 2;
@@ -77,7 +86,6 @@ public partial class MainGameLoop : Node2D
 
 		_dialog.Confirmed += SubmitAnswer;
 		_dialog.Canceled += OnDialogCanceled;
-
 		_dialog.PopupCentered();
 	}
 
@@ -192,7 +200,7 @@ private bool IsMouseOverUI()
 private void OnFoxKilled()
 {
 	_coins += 10;
-	GD.Print("fox killed! coins: ", _coins);
+	coinText.Text = "Coins: " + _coins;
 }
 	private void PlaceTroop(Vector2 position)
 	{
@@ -205,29 +213,53 @@ private void OnFoxKilled()
 		switch (selectedTroop)
 		{
 			case 1:
-				GD.Print("placing jayhawk basic");
+				if (_coins-5 < 0){break;}
+				_coins -= 5;
 				var jayhawk = _jayhawkScene.Instantiate<JayHawkBasic>();
 				jayhawk.Position = position;
 				AddChild(jayhawk);
 				break;
 			case 2:
+				if (_coins-25 < 0){break;}
+				_coins -= 25;
 				var jayhawkTwo = _jayhawkTwoScene.Instantiate<JayHawkTwo>();
 				jayhawkTwo.Position = position;
 				AddChild(jayhawkTwo);
 				break;
-		}
+			case 3:
+				if (_coins-30 < 0){break;}
+				_coins -= 30;
+				var jayhawkThree = _jayhawkThreeScene.Instantiate<JayHawkThree>();
+				jayhawkThree.Position = position;
+				AddChild(jayhawkThree);
+				break;
+			case 4:
+				if (_coins-50 < 0){break;}
+				_coins -= 50;
+				var jayhawkFour = _jayhawkFourScene.Instantiate<JayHawkFour>();
+				jayhawkFour.Position = position;
+				AddChild(jayhawkFour);
+				break;
+}
+			coinText.Text = "Coins: " + _coins;
+
 	}
 
-	private void OnFoxReachedEnd()
+// update OnFoxReachedEnd
+private void OnFoxReachedEnd()
+{
+	heartsLeft -= 1;
+	GD.Print("health remaining: ", heartsLeft);
+	if (heartsLeft == 0)
 	{
-		heartsLeft -= 1;
-		GD.Print("health remaining: ", heartsLeft);
-		if (heartsLeft <= 0)
-			GD.Print("game over");
+		_gameOverScreen.Visible = true;
+		GetTree().Paused = true;
 	}
+}
 
 	public override void _Process(double delta)
 	{
+		GD.Print(heartsLeft);
 		_spawnTimer += (float)delta;
 		if (_spawnTimer >= _spawnInterval)
 		{
