@@ -1,10 +1,9 @@
-[gd_scene format=3 uid="uid://citg2viw3xcv8"]
+[gd_scene format=3 uid="uid://dsdy60y7eqqdd"]
 
 [ext_resource type="Texture2D" uid="uid://iod2nxv1pekb" path="res://assets/sprites/mapv2.png" id="1_3wwup"]
-[ext_resource type="Script" uid="uid://cafuycxpc2g4s" path="res://src/Pathfinding.cs" id="2_np0xw"]
-[ext_resource type="Texture2D" uid="uid://bvlf0s8fwdaup" path="res://assets/sprites/fox.png" id="3_3wwup"]
-[ext_resource type="Texture2D" uid="uid://c73k4q43frenp" path="res://assets/sprites/jayhawk.jpg" id="4_3wwup"]
-[ext_resource type="Script" uid="uid://bbiivyebqlw2c" path="res://src/JayHawkBasic.cs" id="4_nim1l"]
+[ext_resource type="Script" uid="uid://bph0tgd5j8ovw" path="res://src/MainGameLoop.cs" id="1_m7d42"]
+[ext_resource type="Texture2D" uid="uid://bo4e1chn26v4u" path="res://assets/sprites/standardgrunt.png" id="4_618t1"]
+[ext_resource type="Texture2D" uid="uid://cxwcwft8xvm7c" path="res://assets/sprites/bigjay.png" id="5_iblqc"]
 [ext_resource type="Texture2D" uid="uid://cu567bybbaygm" path="res://assets/sprites/select.png" id="6_nim1l"]
 
 [sub_resource type="Curve2D" id="Curve2D_7dhf1"]
@@ -13,18 +12,18 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nim1l"]
-size = Vector2(86.31932, 65.09825)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5o4sk"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_odbyl"]
-radius = 15.004166
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_618t1"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rptsv"]
-radius = 109.55364
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iblqc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukq5c"]
 
 [node name="Gameloop" type="Node2D" unique_id=380856490]
+script = ExtResource("1_m7d42")
 
-[node name="Testmap" type="Sprite2D" parent="." unique_id=1516245502]
+[node name="Map" type="Sprite2D" parent="." unique_id=1516245502]
 position = Vector2(572, 324.50003)
 scale = Vector2(0.39999998, 0.3676136)
 texture = ExtResource("1_3wwup")
@@ -32,45 +31,69 @@ texture = ExtResource("1_3wwup")
 [node name="GamePath" type="Path2D" parent="." unique_id=2069844324]
 curve = SubResource("Curve2D_7dhf1")
 
-[node name="PathFollower" type="PathFollow2D" parent="GamePath" unique_id=945081837]
-position = Vector2(152, 482)
-rotation = 0.006024024
-script = ExtResource("2_np0xw")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=631505504]
 
-[node name="Fox" type="AnimatableBody2D" parent="GamePath/PathFollower" unique_id=1975510586]
-position = Vector2(24.132093, 21.855034)
-
-[node name="Fox" type="Sprite2D" parent="GamePath/PathFollower/Fox" unique_id=1688290705]
-position = Vector2(-140.0577, -9.156448)
-scale = Vector2(0.36874437, 0.44559312)
-texture = ExtResource("3_3wwup")
-
-[node name="FoxBox" type="CollisionShape2D" parent="GamePath/PathFollower/Fox" unique_id=25545298]
-position = Vector2(-141.03358, -5.1504974)
-scale = Vector2(1.0000001, 1.0000001)
-shape = SubResource("RectangleShape2D_nim1l")
-
-[node name="JayhawkProto" type="AnimatableBody2D" parent="." unique_id=1141873752]
-position = Vector2(368, 116)
-script = ExtResource("4_nim1l")
-
-[node name="JayhawkSprite" type="Sprite2D" parent="JayhawkProto" unique_id=1293964434]
-position = Vector2(-192.99998, 58)
-scale = Vector2(0.093154766, 0.09360988)
-texture = ExtResource("4_3wwup")
-
-[node name="stupidPhysics" type="CollisionShape2D" parent="JayhawkProto" unique_id=558444874]
-position = Vector2(-206, 40)
-shape = SubResource("CircleShape2D_odbyl")
-
-[node name="AreaObj" type="Area2D" parent="JayhawkProto" unique_id=1656689488]
-position = Vector2(-221, 150)
-
-[node name="Area Collision" type="CollisionShape2D" parent="JayhawkProto/AreaObj" unique_id=1077121089]
-position = Vector2(21, -92)
-shape = SubResource("CircleShape2D_rptsv")
-
-[node name="Sprite2D" type="Sprite2D" parent="JayhawkProto" unique_id=1240845343]
-position = Vector2(144, 473)
-scale = Vector2(0.6125, 0.64375)
+[node name="ButtonTexture" type="Sprite2D" parent="CanvasLayer" unique_id=186930924]
+position = Vector2(569, 586)
+scale = Vector2(0.6791666, 0.78125)
 texture = ExtResource("6_nim1l")
+
+[node name="Troop2" type="Button" parent="CanvasLayer" unique_id=1764296624]
+offset_left = 532.0
+offset_top = 533.0
+offset_right = 635.0
+offset_bottom = 635.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
+
+[node name="Troop0" type="Button" parent="CanvasLayer" unique_id=826087000]
+offset_left = 267.0
+offset_top = 537.0
+offset_right = 370.0
+offset_bottom = 639.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
+
+[node name="BasicUnit" type="Sprite2D" parent="CanvasLayer/Troop0" unique_id=153930727]
+position = Vector2(52.999992, 50.999992)
+scale = Vector2(0.3625, 0.375)
+texture = ExtResource("4_618t1")
+
+[node name="Troop1" type="Button" parent="CanvasLayer" unique_id=1043677011]
+offset_left = 401.0
+offset_top = 535.0
+offset_right = 504.0
+offset_bottom = 637.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Troop1" unique_id=1500761492]
+position = Vector2(45.000004, 50.999985)
+scale = Vector2(0.39375, 0.4249998)
+texture = ExtResource("5_iblqc")
+
+[node name="Troop3" type="Button" parent="CanvasLayer" unique_id=2129152314]
+offset_left = 644.0
+offset_top = 535.0
+offset_right = 747.0
+offset_bottom = 637.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
+
+[node name="Troop4" type="Button" parent="CanvasLayer" unique_id=1752978147]
+offset_left = 763.0
+offset_top = 537.0
+offset_right = 866.0
+offset_bottom = 639.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")

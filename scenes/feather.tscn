@@ -4,15 +4,15 @@
 [ext_resource type="Script" uid="uid://cntf6o8lxe3d5" path="res://src/Feather.cs" id="1_uauuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rv6ig"]
-size = Vector2(5.109375, 9.71875)
+size = Vector2(24.554688, 32.859375)
 
 [node name="Feather" type="AnimatableBody2D" unique_id=390820008]
 sync_to_physics = false
 script = ExtResource("1_uauuc")
 
 [node name="Feather Texture" type="Sprite2D" parent="." unique_id=1350759083]
-position = Vector2(-3.8146973e-06, 1.9999981)
-scale = Vector2(0.066666685, 0.1033333)
+position = Vector2(-0.2500006, -1.6874995)
+scale = Vector2(0.20333338, 0.22250004)
 texture = ExtResource("1_370ba")
 
 [node name="NonPhysics" type="CollisionShape2D" parent="." unique_id=1179649008]
@@ -21,5 +21,4 @@ shape = SubResource("RectangleShape2D_rv6ig")
 [node name="FeatherArea2D" type="Area2D" parent="." unique_id=1209226674]
 
 [node name="CollisionFeather" type="CollisionShape2D" parent="FeatherArea2D" unique_id=1299522630]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_rv6ig")
