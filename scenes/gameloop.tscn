@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://dsdy60y7eqqdd"]
 
 [ext_resource type="Texture2D" uid="uid://iod2nxv1pekb" path="res://assets/sprites/mapv2.png" id="1_3wwup"]
+[ext_resource type="Script" uid="uid://dswp3irtswvyb" path="res://src/WaveSpawner.cs" id="1_iblqc"]
 [ext_resource type="Script" uid="uid://bph0tgd5j8ovw" path="res://src/MainGameLoop.cs" id="1_m7d42"]
+[ext_resource type="Texture2D" uid="uid://bp1t1f5s7bfg3" path="res://assets/sprites/derpylegs.png" id="4_7f6x0"]
 [ext_resource type="Texture2D" uid="uid://bo4e1chn26v4u" path="res://assets/sprites/standardgrunt.png" id="4_618t1"]
 [ext_resource type="Texture2D" uid="uid://cxwcwft8xvm7c" path="res://assets/sprites/bigjay.png" id="5_iblqc"]
 [ext_resource type="Texture2D" uid="uid://cu567bybbaygm" path="res://assets/sprites/select.png" id="6_nim1l"]
+[ext_resource type="PackedScene" uid="uid://diwfj0fj1jp2q" path="res://scenes/fox.tscn" id="6_ukq5c"]
 
 [sub_resource type="Curve2D" id="Curve2D_7dhf1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 152, 482, 0, 0, 0, 0, 982, 487, 0, 0, 0, 0, 982, 311, 0, 0, 0, 0, 153, 307, 0, 0, 0, 0, 93, 307, 0, 0, 0, 0, 91, 78, 0, 0, 0, 0, 1058, 67)
+"points": PackedVector2Array(0, 0, 0, 0, -40, 499, 0, 0, 0, 0, 982, 487, 0, 0, 0, 0, 982, 311, 0, 0, 0, 0, 153, 307, 0, 0, 0, 0, 93, 307, 0, 0, 0, 0, 91, 78, 0, 0, 0, 0, 1283, 83)
 }
 point_count = 7
 
@@ -27,6 +30,53 @@ script = ExtResource("1_m7d42")
 position = Vector2(572, 324.50003)
 scale = Vector2(0.39999998, 0.3676136)
 texture = ExtResource("1_3wwup")
+
+[node name="Panel" type="Panel" parent="." unique_id=1928065478]
+offset_left = 889.0
+offset_top = 549.0
+offset_right = 1118.0
+offset_bottom = 629.0
+
+[node name="AnswerD" type="Button" parent="Panel" unique_id=964246216]
+layout_mode = 0
+offset_left = 173.0
+offset_top = 17.0
+offset_right = 228.0
+offset_bottom = 67.0
+
+[node name="AnswerC" type="Button" parent="Panel" unique_id=95760573]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 16.0
+offset_right = 164.0
+offset_bottom = 65.0
+
+[node name="AnswerB" type="Button" parent="Panel" unique_id=2048852665]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 18.0
+offset_right = 105.0
+offset_bottom = 64.0
+
+[node name="AnswerA" type="Button" parent="Panel" unique_id=2008811533]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 67.0
+
+[node name="Question Text" type="Label" parent="Panel" unique_id=2141299559]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -2.476
+anchor_right = 1.8470001
+anchor_bottom = 1.0
+offset_left = 485.0
+offset_top = 205.28
+offset_right = 568.032
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GamePath" type="Path2D" parent="." unique_id=2069844324]
 curve = SubResource("Curve2D_7dhf1")
@@ -47,6 +97,11 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Troop2" unique_id=453430633]
+position = Vector2(38.000015, 53.999996)
+scale = Vector2(0.41562518, 0.43749988)
+texture = ExtResource("4_7f6x0")
 
 [node name="Troop0" type="Button" parent="CanvasLayer" unique_id=826087000]
 offset_left = 267.0
@@ -97,3 +152,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_5o4sk")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_618t1")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_iblqc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_ukq5c")
+
+[node name="WaveSpawner" type="Node2D" parent="." unique_id=614135346]
+script = ExtResource("1_iblqc")
+EnemyScene = ExtResource("6_ukq5c")
+Path2DPath = NodePath("../GamePath")
