@@ -1,9 +1,11 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class WaveSpawner : Node2D
 {
-    [Export] public PackedScene EnemyScene { get; set; }
+    [Export] public PackedScene EnemyScene {get; set; }
+
     [Export] public NodePath Path2DPath { get; set; }
     [Export] public float TimeBetweenWaves { get; set; } = 20.0f;
 
@@ -17,21 +19,22 @@ public partial class WaveSpawner : Node2D
     {
         public int Count;
         public float Interval;
+        public int MaxHealth;
     }
 
     private List<WaveData> _waves = new()
     {
         // WAVES
-        new WaveData { Count = 5,  Interval = 2f }, // 1
-        new WaveData { Count = 10, Interval = 2f }, // 2
-        new WaveData { Count = 10, Interval = 1.5f }, // 3
-        new WaveData { Count = 15, Interval = 1.5f }, // 4
-        new WaveData { Count = 10, Interval = 0.8f }, // 5
-        new WaveData { Count = 20, Interval = 1.5f }, // 6 
-        new WaveData { Count = 15, Interval = 1.0f }, // 7
-        new WaveData { Count = 20, Interval = 1.0f }, // 8
-        new WaveData { Count = 15, Interval = 1.0f }, // 9
-        new WaveData { Count = 40, Interval = 1.0f }, // 10
+        new WaveData { Count = 5,  Interval = 2f , MaxHealth = 5},       // 1
+        new WaveData { Count = 10, Interval = 2f , MaxHealth = 5},       // 2
+        new WaveData { Count = 5, Interval = 1.5f , MaxHealth = 10},     // 3
+        new WaveData { Count = 10, Interval = 1.5f , MaxHealth = 10},    // 4
+        new WaveData { Count = 10, Interval = 0.5f , MaxHealth = 5},     // 5
+        new WaveData { Count = 15, Interval = 1.5f , MaxHealth = 15},   // 6 
+        new WaveData { Count = 15, Interval = 1.0f , MaxHealth = 15},   // 7
+        new WaveData { Count = 20, Interval = 1.0f , MaxHealth = 15},   // 8
+        new WaveData { Count = 15, Interval = 1.0f , MaxHealth = 20},    // 9
+        new WaveData { Count = 20, Interval = 1.0f , MaxHealth = 20},    // 10
     };
 
     private int _currentWave = 0;
@@ -102,7 +105,7 @@ public partial class WaveSpawner : Node2D
 
         _isCountingDown = false;
         _countdownPaused = false;
-        GD.Print("Countdown skipped!");
+        GD.Print("Skipping to next wave");
         StartWave(_nextWaveIndex);
     }
 
@@ -152,19 +155,8 @@ public partial class WaveSpawner : Node2D
 
     private void SpawnEnemy()
     {
-        if (EnemyScene == null)
-        {
-            GD.PrintErr("EnemyScene is not assigned!");
-            return;
-        }
-
-        if (_path2D == null)
-        {
-            GD.PrintErr("Path2D is not assigned!");
-            return;
-        }
-
         var enemy = EnemyScene.Instantiate<Enemy>();
+        enemy.MaxHealth = _waves[_currentWave].MaxHealth;
         enemy.Scale = new Vector2(0.5f, 0.5f);
         enemy.Progress = 0f;
         _path2D.AddChild(enemy);

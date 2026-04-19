@@ -14,8 +14,16 @@ using System.ComponentModel;
 /// </summary>
 public partial class Enemy : PathFollow2D
 {
+    public enum EnemyType
+    {
+        Red, 
+        Blue,  
+        Green,
+        Grey
+    };
+    public EnemyType Type { get; private set; }
     [Export] public float Speed = 100f;             // Units per second
-    [Export] public int MaxHealth = 15;            // Max health
+    [Export] public int MaxHealth;            // Max health
     [Export] private int _currentHealth;
 
     // Emitted when an Area2D or PhysicsBody2D enters the child Area2D
@@ -32,6 +40,14 @@ public partial class Enemy : PathFollow2D
     private Area2D _area;
     public override void _Ready()
     {
+        Type = MaxHealth switch
+        {
+            <= 5 => EnemyType.Red,
+            <= 10 => EnemyType.Blue,
+            <= 15 => EnemyType.Green,
+            _ => EnemyType.Grey
+        };
+
         _sprite = GetNode<Sprite2D>("Sprite2D");
         _currentHealth = MaxHealth;
 
@@ -97,7 +113,7 @@ public partial class Enemy : PathFollow2D
 
         _sprite.Texture = _currentHealth switch
         {
-            > 20 => Grey_Fox,
+            >= 20 => Grey_Fox,
             > 10 => Green_Fox,
             > 5  => Blue_Fox,
             _    => Red_Fox
